@@ -2,13 +2,73 @@
 <template>
   <header>
     <h1>Resistance Calculator</h1>
-    <CircuitDisplay/>
+    <ResistorAdder @resistor-added="resistorAdded"/>
+    <ResistorModifier :own_value="value" :own_nr="index" 
+    v-for="(value, index) in resistors" :key="index" 
+    @resistor-changed="resistorChanged"
+    @remove-resistor="resistorRemoved"/>
+    <CircuitDisplay :result="result" @ser-or-par-changed="connectionChanged"/>
   </header>
 </template>
 
-<script setup lang="ts">
-  import ResistorAdder from './components/ResistorAdder.vue';
-  import CircuitDisplay from './components/CircuitDisplay.vue';
+<script lang="ts">
+import ResistorAdder from './components/ResistorAdder.vue';
+import CircuitDisplay from './components/CircuitDisplay.vue';
+import ResistorModifier from './components/ResistorModifier.vue';
+
+export default {
+    data() {
+        return {
+          result: 0,
+          resistors: [],
+          ser_or_par: false
+        }
+    },
+    components: {
+      ResistorAdder,
+      CircuitDisplay,
+      ResistorModifier
+    },
+    methods: {
+        resistorAdded(res_value:any) {
+          this.resistors.push(res_value);
+          console.log(this.resistors);
+          this.calculateResistance();
+        },
+        resistorRemoved(res_nr:any) {
+          console.log(this.resistors);
+          console.log(res_nr);
+          this.resistors.splice(res_nr, 1);
+          console.log(this.resistors);
+          this.calculateResistance();
+        },
+        resistorChanged(new_res_value:any, res_nr:any) {
+          this.resistors[res_nr] = new_res_value;
+          this.calculateResistance();
+        },
+        calculateResistance() {
+          console.log("calculating...")
+          this.result = 0;
+          if (this.ser_or_par){
+            for (let i = 0; i < this.resistors.length; i++){
+              this.result += this.resistors[i];
+            }
+          } else if (!this.ser_or_par) {
+            for (let i = 0; i < this.resistors.length; i++){
+              this.result += 1 / this.resistors[i];
+            }
+            this.result = 1 / this.result;
+          }
+          this.result = this.result.toFixed(3);
+          console.log(this.result);
+        },
+        connectionChanged(new_ser_or_par:any){
+          console.log("changed ser_to_pal");
+          this.ser_or_par = new_ser_or_par;
+          this.calculateResistance();
+        }
+    },
+};
 </script>
 
 
@@ -48,30 +108,4 @@ nav a:first-of-type {
   border: 0;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
