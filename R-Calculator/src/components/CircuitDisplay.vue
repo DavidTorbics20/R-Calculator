@@ -1,12 +1,17 @@
 <template>
     <div>
-        <img id="parallel-img" class="image" src="../images/parallel.png"/>
-        <img id="serial-img" class="image" src="../images/serial.png"/>
+        <!--
+            <img id="parallel-img" class="image" src="../images/parallel.png"/>
+            <img id="serial-img" class="image" src="../images/serial.png"/>
+            
+        -->
         <p></p>
-        <button id="parallel-btn" v-on:click="changeToSer">Parallel</button>
-        <button id="serial-btn" v-on:click="changeToPar">Serial</button>
+        <div class="two-btn center">
+            <button class="L-btn" v-on:click="changeToSer">Parallel</button>
+            <button class="R-btn" v-on:click="changeToPar">Seriell</button>
+        </div>
         <p></p>
-        <label>The total value of the resistors is {{ result }}</label>
+        <label class="center">Der Gesammtwiderstand beträgt {{ result }} <span>&#8486;</span></label>
     </div>
 </template>
 

@@ -1,12 +1,19 @@
 
 <template>
-    <div>
-        <label>R{{ own_nr }} value: </label>
-        <input type="number" min="1" max="10000" 
-        class="number-field-input" inputmode="numeric" 
-        pattern="/d+" v-model="my_value" >
-        <button v-on:click="changeValue">Change</button>
-        <button v-on:click="removeResistor">Remove</button>
+    <div class="container">
+        <label class="R">R{{ own_nr }}: 
+            <input type="number" min="1" max="10000" 
+            class="number-field-input" inputmode="numeric" 
+            pattern="/d+" v-model="my_value" >
+        </label>
+        <div class="two-btn center">
+            <button class="L-btn" v-on:click="changeValue">
+                <img class="btn-image" src="../images/confirm.png">
+            </button>
+            <button class="R-btn" v-on:click="removeResistor">
+                <img class="btn-image" src="../images/remove.png">
+            </button>
+        </div>
     </div>
 </template>
 
@@ -26,18 +33,20 @@ export default {
         }
     },
     watch: {
-        own_value: function(newValue, oldvalue) {
-            this.my_value = oldvalue;
+        own_value: function(newValue) {
+            this.my_value = newValue;
         }
+    },
+    mounted() {
+        this.my_value = this.own_value;
     },
     // hier dann so mit onmount machen damit ich später dann auch value changen kann
     methods: {
         changeValue() {
             console.log("New value of resistor " + this.own_nr + " is: " + this.own_value);
-            this.$emit('resistor-changed', this.own_value, this.own_nr)
+            this.$emit('resistor-changed', this.my_value, this.own_nr)
         },
         removeResistor() {
-            console.log("Removing R" + this.own_nr);
             this.$emit('remove-resistor', this.own_nr);
         }
     },

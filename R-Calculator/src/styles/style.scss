@@ -2,8 +2,126 @@ html {
     background-color: #efefef;
 }
 
+header {
+    line-height: 1.5;
+    max-height: 100vh;
+    font-size: large;
+}
+
+h1 {
+    font-size: 1fr;
+}
+
+.number-field-input {
+    width: 100px;
+}
+
 .image {
     width: 100px;
     height: 100px;
     margin: 10px 10px 10px 10px;
+}
+
+.btn-image {
+    width: 28px;
+}
+
+#ser_par {
+    margin: 10px;
+}
+
+// FOR THE RESISTORMODIFY
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.result-label,
+.label {
+    white-space: nowrap; /* Keeps the label text on one line */
+}
+  
+.container {
+    width: 90%; /* Adjust width as needed */
+    margin: 0 auto;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.container label,
+.container input,
+.container button {
+    margin: 5px;
+}
+  
+.R {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 1px 3px 1px 15px;
+    color: black;
+    z-index: 0;
+    font-size: 12px;
+}
+
+.container input {
+    width: 120px; /* Adjust width as needed */
+    
+    border:0; // remove default border
+    border-bottom:1px solid #eee; // add only bottom border
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius: 10px;
+    z-index: 1;
+}
+  
+.Add {
+    border: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 20px; /* Adjust the radius as needed */
+    overflow: hidden;
+}
+  
+.container button:hover {
+    background-color: #0056b3;
+}
+
+// BUTTON STYLING
+
+.two-btn {
+    border-radius: 20px; /* Adjust the radius as needed */
+    overflow: hidden;
+}
+  
+.two-btn button {
+    border: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+  
+.two-btn button:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+  
+.two-btn button:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+  
+.two-btn button:hover {
+    background-color: #0056b3;
+}
+
+.two-btn.R-btn {
+    background-color: red;
 }

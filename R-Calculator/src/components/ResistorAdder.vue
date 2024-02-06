@@ -1,11 +1,15 @@
 
 <template>
-    <div>
-        <label>Enter resistor value: </label>
-        <input type="number" min="1" max="10000" 
-        class="number-field-input" inputmode="numeric" 
-        pattern="/d+" v-model="res_val">
-        <button v-on:click="numberInput">Add</button>
+    <div class="container">
+        <label class="R">R-Wert eingeben: 
+
+            <input type="number" min="1" max="10000" 
+            class="number-field-input" inputmode="numeric" 
+            pattern="/d+" v-model="res_val">
+        </label>
+        <button class="Add" v-on:click="numberInput" icon="pi pi-check">
+            <img class="btn-image" src="../images/add.png">
+        </button>
     </div>
 </template>
 
